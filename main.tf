@@ -47,7 +47,7 @@ resource "aws_instance" "myapp" {
   }
 
   lifecycle {
-    postcondition {
+    precondition {
       condition     = self.ami == data.hcp_packer_image.myapp.cloud_image_id
       error_message = "Please redeploy to update to image ID: ${data.hcp_packer_image.myapp.cloud_image_id}."
     }
