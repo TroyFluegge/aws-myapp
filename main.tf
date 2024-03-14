@@ -42,7 +42,7 @@ resource "aws_instance" "myapp" {
     Name               = "${var.prefix}-myapp-${var.environment}"
     HCP-Image-Channel  = data.hcp_packer_image.myapp.channel
     HCP-Iteration-ID   = data.hcp_packer_iteration.myapp.ulid
-    HCP-Image-Version  = data.hcp_packer_iteration.myapp.incremental_version
+    HCP-Image-Fingerprint  = data.hcp_packer_iteration.myapp.fingerprint
     HCP-Image-Creation = data.hcp_packer_iteration.myapp.created_at
   }
 
