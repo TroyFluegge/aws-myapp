@@ -24,7 +24,7 @@ data "hcp_packer_version" "myapp" {
 data "hcp_packer_artifact" "myapp" {
   bucket_name    = data.hcp_packer_version.myapp.bucket_name
   platform = "aws"
-  id   = var.iteration_id == null ? data.hcp_packer_version.myapp.ulid : var.iteration_id
+  id   = var.iteration_id == null ? data.hcp_packer_version.myapp.id : var.iteration_id
   region         = var.region
 }
 
