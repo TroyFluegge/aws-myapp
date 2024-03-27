@@ -40,7 +40,7 @@ resource "aws_instance" "myapp" {
   user_data                   = file("${path.module}/scripts/userdata-server.sh")
   tags = {
     Name               = "${var.prefix}-myapp-${var.environment}"
-    HCP-Image-Channel  = data.hcp_packer_artifact.myapp.channel
+    HCP-Image-Channel  = data.hcp_packer_artifact.myapp.channel_name
     HCP-Iteration-ID   = data.hcp_packer_version.myapp.ulid
     HCP-Image-Fingerprint  = data.hcp_packer_version.myapp.fingerprint
     HCP-Image-Creation = data.hcp_packer_version.myapp.created_at
