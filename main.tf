@@ -24,7 +24,6 @@ data "hcp_packer_version" "myapp" {
 data "hcp_packer_artifact" "myapp" {
   bucket_name    = data.hcp_packer_version.myapp.bucket_name
   platform = "aws"
-  id   = data.hcp_packer_version.myapp.id
   region         = var.region
   version_fingerprint = data.hcp_packer_version.myapp.fingerprint
 }
