@@ -18,7 +18,7 @@
 
 data "hcp_packer_version" "myapp" {
   bucket_name = "hcp-packer-myapp"
-  channel     = var.environment
+  channel_name     = var.environment
 }
 
 data "hcp_packer_artifact" "myapp" {
