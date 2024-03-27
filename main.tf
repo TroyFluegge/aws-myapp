@@ -26,6 +26,7 @@ data "hcp_packer_artifact" "myapp" {
   platform = "aws"
   id   = var.iteration_id == null ? data.hcp_packer_version.myapp.id : var.iteration_id
   region         = var.region
+  version_fingerprint = data.hcp_packer_version.myapp.fingerprint
 }
 
 resource "aws_instance" "myapp" {
