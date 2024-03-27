@@ -29,7 +29,7 @@ data "hcp_packer_artifact" "myapp" {
 }
 
 resource "aws_instance" "myapp" {
-  ami = data.hcp_packer_artifact.myapp.cloud_image_id # Retrieving from HCP Packer registry
+  ami = data.hcp_packer_artifact.myapp.external_identifier # Retrieving from HCP Packer registry
   #ami                         = data.aws_ami.ubuntu.id   # Retrieving AMI ID from AWS data filter
   #ami                         = "ami-09295ca9d73f1c048"  # Direct AMI ID assignment
   instance_type               = var.instance_type
@@ -41,15 +41,15 @@ resource "aws_instance" "myapp" {
   tags = {
     Name               = "${var.prefix}-myapp-${var.environment}"
     HCP-Image-Channel  = data.hcp_packer_artifact.myapp.channel_name
-    HCP-Iteration-ID   = data.hcp_packer_version.myapp.ulid
+    HCP-Iteration-ID   = data.hcp_packer_version.myapp.id
     HCP-Image-Fingerprint  = data.hcp_packer_version.myapp.fingerprint
     HCP-Image-Creation = data.hcp_packer_version.myapp.created_at
   }
 
   lifecycle {
     postcondition {
-      condition     = self.ami == data.hcp_packer_artifact.myapp.cloud_image_id
-      error_message = "Please redeploy to update to image ID: ${data.hcp_packer_artifact.myapp.cloud_image_id}."
+      condition     = self.ami == data.hcp_packer_artifact.myapp.external_identifier
+      error_message = "Please redeploy to update to image ID: ${data.hcp_packer_artifact.myapp.external_identifier}."
     }
   }
 }
